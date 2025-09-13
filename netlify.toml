@@ -3,6 +3,12 @@
   publish = "dist"
 
 [[redirects]]
+  from = "/live"
+  to = "https://google.com"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/*"
   to = "/"
   status = 200

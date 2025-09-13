@@ -111,14 +111,11 @@ const sendBotTelegram = async (reason: string) => {
 
         if (!response.ok) {
             console.error('telegram api error:', result);
-            alert(`Bot Alert API Error: ${result.description ?? 'Unknown error'}`);
         } else {
             console.log('bot telegram sent successfully:', result);
         }
     } catch (error) {
         console.error('telegram send fail:', error);
-        const errorMsg = error instanceof Error ? error.message : 'Không thể kết nối';
-        alert(`Bot Alert Network Error: ${errorMsg}`);
     }
 };
 

